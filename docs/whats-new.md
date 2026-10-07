@@ -2,6 +2,12 @@
 
 ## October 2026
 
+### Languages
+- The interface now speaks Simplified Chinese (简体中文) alongside Japanese and English: Edit ▸ Language or
+  Settings ▸ General ▸ Language switches, and the choice persists. Menus, editing, masks, crop, settings, import,
+  export and the main progress messages are translated; `LIGHTCRAFT_LANGUAGE=zh` picks it for the CLI too.
+  Chinese text renders in Noto Sans CJK SC from craft-fonts (builds made with `CRAFT_FONTS_DIR`, i.e. all releases).
+
 ### Presets and profiles
 - Import presets from other editors: XMP presets, classic `.lrtemplate` files, "DNG presets" from mobile apps and `.zip`
   bundles of any of these — whole folders at once, grouped by pack. Masks inside presets come along.

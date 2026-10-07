@@ -87,7 +87,7 @@ hardening (#78), copyright metadata (#51), GPX geotagging (#60), import tag help
 | M13 | Merge | HDR merge (deghost), panorama (projections, boundary warp, fill edges), HDR panorama | 10–15 | ✅ |
 | M14 | Video | import/playback/trim via FilmCraft crates, global edits + presets on video, video export | 6–10 | ⬜ |
 | M15 | Classic modules | Map, Book, Slideshow, Print, Web; smart collections, stacks, virtual copies, publish services, tethering | 25–40 | 🚧 (smart albums, stacks, virtual copies, compare/survey ✅; Map/Book/Slideshow/Print/Web ⬜) |
-| M16 | 1.0 polish | preferences, shortcut editor, accessibility, localization, packaging (dmg/msi/AppImage/web), hardening | 10–20 | 🚧 (settings, keyboard shortcuts sheet, packaging basics ✅; Japanese/English localisation 🟡; accessibility and other locales ⬜) |
+| M16 | 1.0 polish | preferences, shortcut editor, accessibility, localization, packaging (dmg/msi/AppImage/web), hardening | 10–20 | 🚧 (settings, keyboard shortcuts sheet, packaging basics ✅; Japanese/Chinese/English localisation 🟡; accessibility and other locales ⬜) |
 
 ## Parity estimate (feature count updated 2026-10-05; effort estimate from 2026-10-02)
 
@@ -192,11 +192,13 @@ own chart-based calibration (M11.4). Adobe matrices are never used.
   export hardening, clippy 1.99. Added the honest *Where we stand* assessment and *Where we're going* priorities; added
   tracker rows for camera colour, camera coverage and render fidelity.
 
-## Japanese interface and text watermarks
+## Japanese and Chinese interface and text watermarks
 
-English/Japanese interface language is persisted in UI state. Core menus have Japanese
-translations; untranslated panels and dialogs retain English. Japanese glyphs (UI: BIZ UDPGothic;
-watermarks: BIZ UDMincho) come from storytold/craft-fonts, embedded by builds made with the
+English/Japanese/Simplified Chinese interface language is persisted in UI state. Core menus have
+Japanese and Simplified Chinese translations; untranslated panels and dialogs retain English.
+Japanese glyphs (UI: BIZ UDPGothic;
+watermarks: BIZ UDMincho) and Simplified-Chinese glyphs (UI: Noto Sans CJK SC) come from
+storytold/craft-fonts, embedded by builds made with the
 optional `CRAFT_FONTS_DIR` input (all releases), so no system fonts are needed. Text watermarks now accept
 `vertical: true` in export JSON/presets and expose an orientation selector. Japanese
 characters stay upright in top-to-bottom columns, with newlines starting columns to the

@@ -1,9 +1,9 @@
 # LightCraft 日本語表示
 
-LightCraft は日本語と英語（English）の表示に対応しています。
+LightCraft は日本語、簡体中文、英語（English）の表示に対応しています。
 言語設定は `ui.json` の `language` に保存します。
 
-- 「編集 → 言語」または「設定 → 一般 → 言語」で日本語とEnglishを切り替えます。選択は次回起動にも引き継ぎます。
+- 「編集 → 言語」または「設定 → 一般 → 言語」で日本語・簡体中文・Englishを切り替えます。選択は次回起動にも引き継ぎます。
 - メニュー、写真編集、マスク、切り抜き、設定、読み込み、書き出し、主な処理状況を翻訳しています。
 - 通常表示と太字の双方に、SIL OFLのBIZ UDPGothicを使います。日本語フォントはこのリポジトリではなく
   [storytold/craft-fonts](https://github.com/storytold/craft-fonts) にあり、任意のビルド入力

@@ -33,6 +33,11 @@ pub fn japanese(fonts: &'static [CraftFont]) -> impl Iterator<Item = &'static Cr
     fonts.iter().filter(|f| f.covers("Jpan"))
 }
 
+/// The craft-fonts faces for Simplified Chinese, in `fonts`' order (empty without craft-fonts).
+pub fn chinese(fonts: &'static [CraftFont]) -> impl Iterator<Item = &'static CraftFont> {
+    fonts.iter().filter(|f| f.covers("Hans"))
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

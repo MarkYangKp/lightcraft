@@ -72,8 +72,10 @@ of it. Full standard: `../craftrules/standards/never-crash.md`
   uses it as the optional build input `CRAFT_FONTS_DIR`: `git clone https://github.com/storytold/craft-fonts ../craft-fonts`
   then `CRAFT_FONTS_DIR=../craft-fonts cargo run -p lightcraft` (or any cargo/xtask command). `crates/engine/build.rs`
   embeds the manifest's fonts as `lightcraft_engine::CRAFT_FONTS` (wasm32: BIZ UDPGothic Regular only); the UI
-  (`theme::font_definitions`) and the export watermark renderer use its Japanese faces as fallbacks after Inter. Unset,
-  `CRAFT_FONTS` is empty: everything builds, tests and runs, but Japanese text has no glyphs. Releases always build
+  (`theme::font_definitions`) and the export watermark renderer use its Japanese and Simplified-Chinese faces as
+  fallbacks after Inter, the UI language's script first (Noto Sans CJK SC for 简体中文, BIZ UDPGothic for the rest).
+  Unset,
+  `CRAFT_FONTS` is empty: everything builds, tests and runs, but Japanese/Chinese text has no glyphs. Releases always build
   with it (`release.yml`, `CRAFT_FONTS_REQUIRED=1`) and ship the fonts' OFL licences. Tests that need these fonts skip
   without it; the FreeBSD CI job runs them with it. Rules: craftrules
   [`standards/fonts.md`](https://github.com/storytold/craftrules/blob/main/standards/fonts.md).

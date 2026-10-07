@@ -110,22 +110,27 @@ pub fn install_fonts(ctx: &egui::Context) {
     ctx.set_fonts(font_definitions(lightcraft_engine::CRAFT_FONTS));
 }
 
-/// Inter (bundled) for Latin text, egui's default fonts, then the craft-fonts Japanese faces as
-/// the last fallback of every family (BIZ UDPGothic first; Bold first for the semibold family).
-/// Without craft-fonts (`craft` empty) Japanese text has no glyphs and shows as boxes.
+/// Inter (bundled) for Latin text, egui's default fonts, then the craft-fonts CJK faces, the
+/// current language's script first (BIZ UDPGothic for Japanese, Noto Sans CJK SC for Chinese;
+/// Latin-first English keeps the Japanese faces), the other script's faces after
+/// (BIZ UDPGothic first within a script; Bold first for the semibold family).
+/// Without craft-fonts (`craft` empty) CJK text has no glyphs and shows as boxes.
 pub fn font_definitions(craft: &'static [lightcraft_engine::CraftFont]) -> FontDefinitions {
+    let script = crate::i18n::language().script();
     let mut fonts = FontDefinitions::default();
     fonts.font_data.insert("Inter".into(), Arc::new(FontData::from_static(include_bytes!("../../../assets/fonts/Inter-Regular.ttf"))));
     fonts.font_data.insert("Inter-SemiBold".into(), Arc::new(FontData::from_static(include_bytes!("../../../assets/fonts/Inter-SemiBold.ttf"))));
-    let japanese: Vec<_> = lightcraft_engine::fonts::japanese(craft).collect();
-    for f in &japanese {
+    let cjk: Vec<_> = lightcraft_engine::fonts::japanese(craft).chain(lightcraft_engine::fonts::chinese(craft)).collect();
+    for f in &cjk {
         fonts.font_data.insert(craft_font_name(f), Arc::new(FontData::from_static(f.bytes)));
     }
     // Craft-fonts faces in preference order for a family drawn in `style`.
     let fallback = |style: &str| {
-        let mut faces = japanese.clone();
-        faces.sort_by_key(|f| (f.family != "BIZ UDPGothic", f.style != style, f.family.contains("Mincho")));
-        faces.into_iter().map(craft_font_name).collect::<Vec<_>>()
+        let mut faces = cjk.clone();
+        faces.sort_by_key(|f| (!f.covers(script), f.family != "BIZ UDPGothic", f.style != style, f.family.contains("Mincho")));
+        let mut names = faces.into_iter().map(craft_font_name).collect::<Vec<_>>();
+        names.dedup();
+        names
     };
     let defaults: Vec<String> = fonts.families.get(&FontFamily::Proportional).cloned().unwrap_or_default();
     let mut prop = vec!["Inter".to_string()];
